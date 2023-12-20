@@ -1,0 +1,25 @@
+package com.example.restaurantz.entity;
+
+import com.example.restaurantz.entity.adducation.Id;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+import java.time.ZonedDateTime;
+import java.util.List;
+
+@EqualsAndHashCode(callSuper = true)
+@Data
+@Entity
+public class Cheque extends Id {
+    private int priceAverage;
+    private ZonedDateTime createdAt;
+
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private User user;
+    @ManyToMany(mappedBy = "chequeList", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<MenuItem> menuItems;
+}
