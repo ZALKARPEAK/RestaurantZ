@@ -3,7 +3,6 @@ package com.example.restaurantz.entity;
 import com.example.restaurantz.entity.adducation.Id;
 import com.example.restaurantz.enums.Role;
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.security.core.GrantedAuthority;
@@ -34,7 +33,6 @@ public class User extends Id implements UserDetails {
     private List<Cheque> cheque;
 
     public User() {
-
     }
 
     @Override

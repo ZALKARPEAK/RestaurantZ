@@ -2,10 +2,7 @@ package com.example.restaurantz.entity;
 
 import com.example.restaurantz.entity.adducation.Id;
 import com.example.restaurantz.enums.RestType;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -22,7 +19,7 @@ public class Restaurant extends Id {
     private int numberOfEmployees;
     private int service;
 
-    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "restaurant", fetch = FetchType.EAGER, cascade = {CascadeType.MERGE,CascadeType.PERSIST})
     private List<JobApplication> jobApplications;
 
     @OneToMany(mappedBy = "restaurant", cascade = {CascadeType.PERSIST,

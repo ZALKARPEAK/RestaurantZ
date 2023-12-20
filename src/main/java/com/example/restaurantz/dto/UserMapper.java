@@ -1,3 +1,4 @@
+/*
 package com.example.restaurantz.dto;
 
 import com.example.restaurantz.entity.User;
@@ -17,3 +18,4 @@ public interface UserMapper {
 
     List<User> usersToUserDTOs(List<User> users);
 }
+*/
