@@ -12,6 +12,7 @@ import com.example.restaurantz.repo.RestaurantRepo;
 import com.example.restaurantz.repo.UserRepo;
 import com.example.restaurantz.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.Hibernate;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -97,16 +98,24 @@ public class UserServiceImpl implements UserService {
                 .findFirst()
                 .orElseThrow(() -> new NotFoundException("JobApplication not found"));
 
+        restaurant.getJobApplications().remove(request);
         request.setRestaurant(null);
+        restaurantRepo.save(restaurant);
         jobApplicationRepo.delete(request);
         return SimpleResponse.builder().message("OK").httpStatus(HttpStatus.OK).build();
     }
 
     @Override
     public SimpleResponse updateUserById(Long id, UserRequest userRequest) {
-        User user = userRepo.findById(id).orElseThrow(() ->
-                new NotFoundException("User not found"));
+        User authenticatedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
+        Restaurant restaurant = authenticatedUser.getRestaurant();
+
+
+        User user = restaurant.getUsers().stream().filter(user1 -> user1.getId() == id).findFirst()
+                        .orElseThrow(() -> new NotFoundException("User not found"));
+
+        Hibernate.initialize(restaurant.getUsers());
         user.setFirstName(userRequest.getFirstName());
         user.setLastName(userRequest.getLastName());
         user.setDateOfBirth(userRequest.getDateOfBirth());
@@ -122,8 +131,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public SimpleResponse deleteUserById(Long id) {
-        User user = userRepo.findById(id).orElseThrow(() ->
-                new NotFoundException("User not found"));
+        User authenticatedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        Restaurant restaurant = authenticatedUser.getRestaurant();
+
+        User user = restaurant.getUsers().stream().filter(user1 -> user1.getId() == id).findFirst()
+                .orElseThrow(() -> new NotFoundException("User not found"));
+
 
         user.setRestaurant(null);
         userRepo.delete(user);

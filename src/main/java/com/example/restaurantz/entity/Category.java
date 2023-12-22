@@ -17,6 +17,6 @@ public class Category extends Id {
 
     @OneToMany(cascade = {CascadeType.DETACH,
             CascadeType.MERGE,
-            CascadeType.REFRESH}, mappedBy = "category")
+            CascadeType.REFRESH, CascadeType.REMOVE}, mappedBy = "category")
     private List<SubCategory> subCategories;
 }
