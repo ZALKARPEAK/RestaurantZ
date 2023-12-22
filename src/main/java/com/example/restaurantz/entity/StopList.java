@@ -16,7 +16,13 @@ public class StopList extends Id {
     private String reason;
     private LocalDate date;
 
-    @OneToOne(cascade = {CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.REFRESH,CascadeType.REMOVE}, mappedBy = "stopList")
-    private MenuItem menuItem;}
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "stopList")
+    private MenuItem menuItem;
+
+    public StopList(String reason, String menuItemName, LocalDate date) {
+        super();
+    }
+
+    public StopList() {
+    }
+}

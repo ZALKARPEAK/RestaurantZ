@@ -29,4 +29,6 @@ public interface MenuItemRepo extends JpaRepository<MenuItem, Long> {
 
     @Query("select new com.example.restaurantz.dto.MenuItem.MenuItemResponse(m.id,m.name,m.image,m.price,m.description,m.isVegetarian) from MenuItem m WHERE m.isVegetarian = :isVag")
     List<MenuItemResponse> filter(@Param("isVag") boolean isVag);
+
+    Optional<MenuItem> findMenuItemByName(String name);
 }

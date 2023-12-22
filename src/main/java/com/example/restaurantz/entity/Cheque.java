@@ -20,6 +20,6 @@ public class Cheque extends Id {
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private User user;
-    @ManyToMany(mappedBy = "chequeList", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToMany(mappedBy = "chequeList", cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
     private List<MenuItem> menuItems;
 }

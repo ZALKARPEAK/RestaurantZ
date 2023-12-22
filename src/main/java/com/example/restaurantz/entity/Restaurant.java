@@ -19,7 +19,7 @@ public class Restaurant extends Id {
     private int numberOfEmployees;
     private int service;
 
-    @OneToMany(mappedBy = "restaurant", fetch = FetchType.EAGER, cascade = {CascadeType.MERGE,CascadeType.PERSIST})
+    @OneToMany(mappedBy = "restaurant", fetch = FetchType.EAGER)
     private List<JobApplication> jobApplications;
 
     @OneToMany(mappedBy = "restaurant", cascade = {CascadeType.PERSIST,

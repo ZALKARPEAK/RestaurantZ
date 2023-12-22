@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
@@ -16,6 +17,7 @@ public class MenuItem extends Id {
     private int price;
     private String description;
     private boolean isVegetarian;
+    private LocalDate isBlocked;
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     private Restaurant restaurant;
