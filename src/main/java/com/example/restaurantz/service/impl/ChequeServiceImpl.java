@@ -44,7 +44,7 @@ public class ChequeServiceImpl implements ChequeService {
                 menuItems.add(menuItem1);
 
                 Cheque cheque = new Cheque();
-                cheque.setCreatedAt(ZonedDateTime.now());
+                cheque.setCreatedAt(LocalDate.now());
 
                 int allPrice = 0;
                 for (MenuItem m : menuItems) {
@@ -102,7 +102,7 @@ public class ChequeServiceImpl implements ChequeService {
 
         if (waiter.getRole().equals(Role.WALTER)) {
             for (Cheque cheque : waiter.getCheque()) {
-                if (cheque.getCreatedAt().toLocalDate().isEqual(date)) {
+                if (cheque.getCreatedAt().isEqual(date)) {
                     int service = cheque.getPriceAverage() * waiter.getRestaurant().getService() / 100;
                     totalPrice += service + cheque.getPriceAverage();
                     counterCheck++;

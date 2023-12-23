@@ -8,6 +8,7 @@ import jakarta.persistence.ManyToOne;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import java.util.List;
 @Entity
 public class Cheque extends Id {
     private int priceAverage;
-    private ZonedDateTime createdAt;
+    private LocalDate createdAt;
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private User user;
