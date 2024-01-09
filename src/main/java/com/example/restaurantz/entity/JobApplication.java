@@ -2,6 +2,7 @@ package com.example.restaurantz.entity;
 
 import com.example.restaurantz.entity.adducation.Id;
 import com.example.restaurantz.enums.Role;
+import jakarta.persistence.Embeddable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.ManyToOne;

@@ -146,7 +146,7 @@ public class ChequeServiceImpl implements ChequeService {
 
         AverageSumResponse averageSumResponse = null;
 
-        if (user.getRole().name().equalsIgnoreCase("WALTER")) {
+        if (user.getRole().name().equalsIgnoreCase("WAITER")) {
             averageSumResponse = chequeRepo.getChequeByCreatedAtAndPriceAverageAndUserId(dateTime, waiterId);
         }
 

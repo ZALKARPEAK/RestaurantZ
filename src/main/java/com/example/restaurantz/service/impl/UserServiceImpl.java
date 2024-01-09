@@ -32,16 +32,16 @@ public class UserServiceImpl implements UserService {
     public SimpleResponse adminRegisterEmployee(UserRequest request) {
         User authenticatedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        if(authenticatedUser != null && !userRepo.existsByEmail(request.getEmail())){
+        if (authenticatedUser != null && !userRepo.existsByEmail(request.getEmail())) {
             User user = new User();
-                    user.setFirstName(request.getFirstName());
-                    user.setLastName(request.getLastName());
-                    user.setDateOfBirth(request.getDateOfBirth());
-                    user.setEmail(request.getEmail());
-                    user.setPassword(request.getPassword());
-                    user.setPhoneNumber(request.getPhoneNumber());
-                    user.setRole(request.getRole());
-                    user.setExperience(request.getExperience());
+            user.setFirstName(request.getFirstName());
+            user.setLastName(request.getLastName());
+            user.setDateOfBirth(request.getDateOfBirth());
+            user.setEmail(request.getEmail());
+            user.setPassword(request.getPassword());
+            user.setPhoneNumber(request.getPhoneNumber());
+            user.setRole(request.getRole());
+            user.setExperience(request.getExperience());
             Restaurant restaurant = authenticatedUser.getRestaurant();
             user.setRestaurant(restaurant);
 
@@ -113,7 +113,7 @@ public class UserServiceImpl implements UserService {
 
 
         User user = restaurant.getUsers().stream().filter(user1 -> user1.getId() == id).findFirst()
-                        .orElseThrow(() -> new NotFoundException("User not found"));
+                .orElseThrow(() -> new NotFoundException("User not found"));
 
         Hibernate.initialize(restaurant.getUsers());
         user.setFirstName(userRequest.getFirstName());
